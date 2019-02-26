@@ -30,6 +30,7 @@ def receive_message():
                 recipient_id = message['sender']['id']
                 if message['message'].get('text'):
                     response_sent_text = initial_message()
+                    init_message=True
                     send_message(recipient_id, response_sent_text)
                 #if user sends us a GIF, photo,video, or any other non-text item
                 if message['message'].get('attachments'):
@@ -63,7 +64,6 @@ def initial_message():
     global init_message
     sample_responses = "Hello, this is the homework bot 2.0! This is a program that will help remind you to do your homework! We just need some information from you first. You're name is needed, teacher/guardian e-mail, and classes are needed"
     # return selected item to the user
-    init_message=True
     return (sample_responses)
 
 #uses PyMessenger to send response to user
