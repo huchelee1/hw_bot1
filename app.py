@@ -23,15 +23,21 @@ def receive_message():
         # get whatever message a user sent the bot
        output = request.get_json()
        for event in output['entry']:
-          messaging = event['messaging']
-          for message in messaging:       
+          for message in messaging:
+            messaging = event['messaging']
+            recipient_id = message['sender']['id']
+            response_sent_text = initial_message()
+            send_message(recipient_id, response_sent_text)
+            init_message=True
             if message.get('message'):
                 recipient_id = message['sender']['id']
                 response_sent_text = initial_message()
                 send_message(recipient_id, response_sent_text)
                 init_message=True
                 #Facebook Messenger ID for user so we know where to send response back to
-                if message['message'].get('text')and init_message==True:
+                elif message['message'].get('text')and init_message==True:
+                    information = message['message'].get('text')
+                    sendinfo(information)
                     response_sent_text = follow_up()
                     send_message(recipient_id, response_sent_text)
                     
@@ -42,6 +48,10 @@ def receive_message():
             
     return "Message Processed"
 
+
+def sendinfo():
+    f=open("crendentials.txt","a+")
+    
 
 def verify_fb_token(token_sent):
     #take token sent by facebook and verify it matches the verify token you sent
