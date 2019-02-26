@@ -28,7 +28,7 @@ def receive_message():
             if message.get('message'):
                 #Facebook Messenger ID for user so we know where to send response back to
                 recipient_id = message['sender']['id']
-                if init_message==False:
+                if message['message'].get('text') is False and init_message==False:
                     response_sent_text = initial_message()
                     send_message(recipient_id, response_sent_text)
                     init_message=True
