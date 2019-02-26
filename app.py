@@ -55,6 +55,7 @@ def verify_fb_token(token_sent):
 
 def credentials(information):
     info_input=open("credentials.txt","a+")
+    return "taken credent"
 
 
 #chooses a random message to send to the user
