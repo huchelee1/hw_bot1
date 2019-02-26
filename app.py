@@ -23,22 +23,23 @@ def receive_message():
         # get whatever message a user sent the bot
        output = request.get_json()
        for event in output['entry']:
-          for message in messaging:
-            recipient_id = message['sender']['id']
-            if message.get('message'):
+            message=event['messaging']
+            for message in messaging:
+                if message.get('message'):
+                    recipient_id = message['sender']['id']
                 #Facebook Messenger ID for user so we know where to send response back to
-                if message['message'].get('text')and init_message==False:
-                    response_sent_text = initial_message()
-                    send_message(recipient_id, response_sent_text)
-                    init_message=True
-                if message['message'].get('text') and init_message==True:
-                    response_sent_text = follow_up()
-                    send_message(recipient_id, response_sent_text)
+                    if message['message'].get('text')and init_message==False:
+                        response_sent_text = initial_message()
+                        send_message(recipient_id, response_sent_text)
+                        init_message=True
+                    if message['message'].get('text') and init_message==True:
+                        response_sent_text = follow_up()
+                        send_message(recipient_id, response_sent_text)
                     
                 #if user sends us a GIF, photo,video, or any other non-text item
-                if message['message'].get('attachments'):
-                    response_sent_nontext = get_message()
-                    send_message(recipient_id, response_sent_nontext)
+                    if message['message'].get('attachments'):
+                        response_sent_nontext = get_message()
+                        send_message(recipient_id, response_sent_nontext)
             
     return "Message Processed"
 
