@@ -26,13 +26,12 @@ def receive_message():
           for message in messaging:
             if message.get('message'):
                 recipient_id = message['sender']['id']
-                response_sent_text = initial_message()
-                send_message(recipient_id, response_sent_text)
-                init_message=True
                 #Facebook Messenger ID for user so we know where to send response back to
-                if message['message'].get('text')and init_message==True:
-                    information = message['message'].get('text')
-                    sendinfo(information)
+                if message['message'].get('text')and init_message==False:
+                    response_sent_text = initial_message()
+                    send_message(recipient_id, response_sent_text)
+                    init_message=True
+                if message['message'.get('text')>3 and init_message==True:
                     response_sent_text = follow_up()
                     send_message(recipient_id, response_sent_text)
                     
