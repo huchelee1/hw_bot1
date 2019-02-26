@@ -24,8 +24,8 @@ def receive_message():
        output = request.get_json()
        for event in output['entry']:
           for message in messaging:
+            recipient_id = message['sender']['id']
             if message.get('message'):
-                recipient_id = message['sender']['id']
                 #Facebook Messenger ID for user so we know where to send response back to
                 if message['message'].get('text')and init_message==False:
                     response_sent_text = initial_message()
