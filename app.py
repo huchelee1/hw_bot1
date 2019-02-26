@@ -7,10 +7,12 @@ app = Flask(__name__)
 ACCESS_TOKEN = 'EAAFwNZBxNu4kBADCKS6NqESrQ626KIl0gAAmklTqBg9T56cnZBFg8jbKofZAkU7RJs96j5PrX2ZCqAPlZAIZBpCZBjD8Shp3qPzMLrSe1zCqZAjlZCfDlSx6wndHynvvY33CdtDXVPDUtRGqsumjKnOdENsA15VcCAQvlzWetaIYI10AahkhveyPx'   #ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 VERIFY_TOKEN = 'VERIFY_TOKEN'   #VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
 bot = Bot (ACCESS_TOKEN)
+init_message=False
 
 #We will receive messages that Facebook sends our bot at this endpoint 
 @app.route("/", methods=['GET', 'POST'])
 def receive_message():
+    global init_message
     if request.method == 'GET':
         """Before allowing people to message your bot, Facebook has implemented a verify token
         that confirms all requests that your bot receives came from Facebook.""" 
@@ -23,7 +25,7 @@ def receive_message():
        for event in output['entry']:
           messaging = event['messaging']
           for message in messaging:
-            if message.get('message'):
+            if message.get('message') and init_message==False:
                 #Facebook Messenger ID for user so we know where to send response back to
                 recipient_id = message['sender']['id']
                 if message['message'].get('text'):
@@ -33,6 +35,12 @@ def receive_message():
                 if message['message'].get('attachments'):
                     response_sent_nontext = get_message()
                     send_message(recipient_id, response_sent_nontext)
+            elif message.get('message') and init_message==True:
+                recipient_id = message['sender']['id']
+                if message['message'].get('text'):
+                    response_sent_text = follow_up()
+                    send_message(recipient_id, response_sent_text)
+                    credentials = list(apppend.message['message'].get('text'))
     return "Message Processed"
 
 
@@ -46,8 +54,10 @@ def verify_fb_token(token_sent):
 
 #chooses a random message to send to the user
 def initial_message():
+    global init_message
     sample_responses = "Hello, this is the homework bot 2.0! This is a program that will help remind you to do your homework! We just need some information from you first. You're name is needed, teacher/guardian e-mail, and classes are needed"
     # return selected item to the user
+    init_message=True
     return (sample_responses)
 
 #uses PyMessenger to send response to user
