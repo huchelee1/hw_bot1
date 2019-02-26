@@ -24,11 +24,6 @@ def receive_message():
        output = request.get_json()
        for event in output['entry']:
           for message in messaging:
-            messaging = event['messaging']
-            recipient_id = message['sender']['id']
-            response_sent_text = initial_message()
-            send_message(recipient_id, response_sent_text)
-            init_message=True
             if message.get('message'):
                 recipient_id = message['sender']['id']
                 response_sent_text = initial_message()
