@@ -25,25 +25,22 @@ def receive_message():
        for event in output['entry']:
           messaging = event['messaging']
           for message in messaging:
-            if message.get('message') and init_message==False:
+            if message.get('message'):
                 #Facebook Messenger ID for user so we know where to send response back to
                 recipient_id = message['sender']['id']
-                if message['message'].get('text'):
+                if message['message'].get('text')and init_message==False:
                     response_sent_text = initial_message()
-                    init_message=True
                     send_message(recipient_id, response_sent_text)
+                    init_message=True
+                if message['message'].get('text')and init_message==True:
+                    response_sent_text = follow_up()
+                    send_message(recipient_id, response_sent_text)
+                    
                 #if user sends us a GIF, photo,video, or any other non-text item
                 if message['message'].get('attachments'):
                     response_sent_nontext = get_message()
                     send_message(recipient_id, response_sent_nontext)
-            elif message.get('message') and init_message==True:
-                recipient_id = message['sender']['id']
-                if message['message'].get('text'):
-                    response_sent_text = follow_up()
-                    send_message(recipient_id, response_sent_text)
-                    information = message['message'].get('text'))
-                    credentials()
-                    
+            
     return "Message Processed"
 
 
@@ -54,9 +51,10 @@ def verify_fb_token(token_sent):
         return request.args.get("hub.challenge")
     return 'Invalid verification token'
 
-def credentials(information):
-    info_input=open("credentials.txt","a+")
-    return "taken credent"
+def follow_up():
+    sample_responses = "Okay, thanks"
+    # return selected item to the user
+    return (sample_responses)
 
 
 #chooses a random message to send to the user
