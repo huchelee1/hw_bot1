@@ -24,14 +24,13 @@ def receive_message():
        output = request.get_json()
        for event in output['entry']:
           messaging = event['messaging']
-          for message in messaging:
+          for message in messaging:       
             if message.get('message'):
-                #Facebook Messenger ID for user so we know where to send response back to
                 recipient_id = message['sender']['id']
-                if message['message'].get('text') is False and init_message==False:
-                    response_sent_text = initial_message()
-                    send_message(recipient_id, response_sent_text)
-                    init_message=True
+                response_sent_text = initial_message()
+                send_message(recipient_id, response_sent_text)
+                init_message=True
+                #Facebook Messenger ID for user so we know where to send response back to
                 if message['message'].get('text')and init_message==True:
                     response_sent_text = follow_up()
                     send_message(recipient_id, response_sent_text)
