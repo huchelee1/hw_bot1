@@ -44,7 +44,7 @@ def receive_message():
     return "Message Processed"
 
 def time_message():
-    response= random.choice["hey! How's your homework going?","Hope your homework is going well!","Don't forget about good homework habits! :)")
+    response= random.choice[("hey! How's your homework going?"),("Hope your homework is going well!"),("Don't forget about good homework habits! :)")]
     return(response)
     
                             
