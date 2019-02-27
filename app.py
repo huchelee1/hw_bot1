@@ -33,7 +33,7 @@ def receive_message():
                         response_sent_text = initial_message()
                         send_message(recipient_id, response_sent_text)
                         init_message=True
-                        if len(message['message'].get('text')>3 and init_message==True:
+                        if len(message['message'].get('text'))>3 and init_message==True:
                             response_sent_text = follow_up()
                             send_message(recipient_id, response_sent_text)
                     
