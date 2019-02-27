@@ -37,8 +37,9 @@ def receive_message():
                     if len(message['message'].get('text'))>3 and init_message==True:
                         response_sent_text = follow_up()
                         send_message(recipient_id, response_sent_text)
-                        t= timer(30.0, hour)
+                        t= timer(30.0,hour)
                         t.start()
+                       
            
     return "Message Processed"
 
@@ -56,7 +57,8 @@ def timer():
                 
 def hour():
     global timerbool
-    timerbool=True
+    if True:
+        return timerbool=True
     return("time up")
 
 
