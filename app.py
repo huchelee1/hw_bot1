@@ -3,6 +3,7 @@ from flask import Flask, request
 from pymessenger.bot import Bot
 import os 
 import thread
+import random
 app = Flask(__name__)
 ACCESS_TOKEN = 'EAAFwNZBxNu4kBADCKS6NqESrQ626KIl0gAAmklTqBg9T56cnZBFg8jbKofZAkU7RJs96j5PrX2ZCqAPlZAIZBpCZBjD8Shp3qPzMLrSe1zCqZAjlZCfDlSx6wndHynvvY33CdtDXVPDUtRGqsumjKnOdENsA15VcCAQvlzWetaIYI10AahkhveyPx'   #ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 VERIFY_TOKEN = 'VERIFY_TOKEN'   #VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
@@ -56,8 +57,8 @@ def hour():
 
 
 def time_message():
-    response= random.choice[("hey! How's your homework going?"),("Hope your homework is going well!"),("Don't forget about good homework habits! :)")]
-    return(response)
+    response=["hey! How's your homework going?","Hope your homework is going well!","Don't forget about good homework habits! :)"]
+    return random.choice(response)
     
                             
 
