@@ -37,9 +37,11 @@ def receive_message():
                     if len(message['message'].get('text'))>3 and init_message==True:
                         response_sent_text = follow_up()
                         send_message(recipient_id, response_sent_text)
-                        timerbool=True
+                        t= timer(30.0, hour)
+                        t.start()
+           
+    return "Message Processed"
 
-                        
 @app.route("/", methods=['POST'])
 def timer():
     global timerbool
@@ -47,15 +49,16 @@ def timer():
     for event in output['entry']:
         messaging=event['messaging']
         for message in messaging:
+            recipient_id=message['sender']['id']
             if timerbool==True:
-                t= Timer(30.0,send_message(recipent_id,timer_massage)
-            
-                        
-                    
-                       
-                    
-               
-    return "Message Processed"
+                response_sent_text= time_message()
+                send_message(recipient_id, response_sent_text)
+                
+def hour():
+    global timerbool
+    timerbool=True
+    return("time up")
+
 
 def time_message():
     response= random.choice[("hey! How's your homework going?"),("Hope your homework is going well!"),("Don't forget about good homework habits! :)")]
