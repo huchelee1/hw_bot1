@@ -8,11 +8,12 @@ ACCESS_TOKEN = 'EAAFwNZBxNu4kBADCKS6NqESrQ626KIl0gAAmklTqBg9T56cnZBFg8jbKofZAkU7
 VERIFY_TOKEN = 'VERIFY_TOKEN'   #VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
 bot = Bot (ACCESS_TOKEN)
 init_message=False
+timerbool=False
 
 #We will receive messages that Facebook sends our bot at this endpoint 
 @app.route("/", methods=['GET', 'POST'])
 def receive_message():
-    global init_message
+    global init_message, timerbool
     if request.method == 'GET':
         """Before allowing people to message your bot, Facebook has implemented a verify token
         that confirms all requests that your bot receives came from Facebook.""" 
@@ -36,17 +37,18 @@ def receive_message():
                     if len(message['message'].get('text'))>3 and init_message==True:
                         response_sent_text = follow_up()
                         send_message(recipient_id, response_sent_text)
-                        t =Timer(30.0,timer)
+                        timerbool=True
 
                         
 @app.route("/", methods=['POST'])
 def timer():
+    global timerbool
     output = request.get_json()
     for event in output['entry']:
         messaging=event['messaging']
         for message in messaging:
-            response_sent_text= time_message()
-            send_message(recipient_id, response_sent_text)
+            if timerbool==True:
+                t= Timer(30.0,send_message(recipent_id,timer_massage)
             
                         
                     
