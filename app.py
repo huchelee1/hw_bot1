@@ -2,6 +2,7 @@
 from flask import Flask, request
 from pymessenger.bot import Bot
 import os 
+import threading
 app = Flask(__name__)
 ACCESS_TOKEN = 'EAAFwNZBxNu4kBADCKS6NqESrQ626KIl0gAAmklTqBg9T56cnZBFg8jbKofZAkU7RJs96j5PrX2ZCqAPlZAIZBpCZBjD8Shp3qPzMLrSe1zCqZAjlZCfDlSx6wndHynvvY33CdtDXVPDUtRGqsumjKnOdENsA15VcCAQvlzWetaIYI10AahkhveyPx'   #ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 VERIFY_TOKEN = 'VERIFY_TOKEN'   #VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
@@ -31,9 +32,9 @@ def receive_message():
                         response_sent_text = initial_message()
                         send_message(recipient_id, response_sent_text)
                         init_message=True
-                    if message['message'].get('text') and init_message==True:
-                        response_sent_text = follow_up()
-                        send_message(recipient_id, response_sent_text)
+                        if message['message'].get('text') and init_message==True
+                            response_sent_text = follow_up()
+                            send_message(recipient_id, response_sent_text)
                     
                 #if user sends us a GIF, photo,video, or any other non-text item
                     if message['message'].get('attachments'):
@@ -42,7 +43,11 @@ def receive_message():
             
     return "Message Processed"
 
-
+def time_message():
+    response= random.choice["hey! How's your homework going?","Hope your homework is going well!","Don't forget about good homework habits! :)")
+    return(response)
+    
+                            
 
 def verify_fb_token(token_sent):
     #take token sent by facebook and verify it matches the verify token you sent
