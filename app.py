@@ -39,7 +39,7 @@ def receive_message():
                         send_message(recipient_id, response_sent_text)
                         t= timer(30.0,hour)
                         t.start()
-                    if timerbool=True:
+                    if timerbool==True:
                         response_sent_text= time_message()
                         send_message(recipient_id, response_sent_text)
 
