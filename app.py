@@ -51,7 +51,7 @@ def receive_message():
                 
 def hour():
     global timerbool
-    return timerbool=True
+    timerbool=True
     return("time up")
 
 
