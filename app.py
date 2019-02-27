@@ -36,10 +36,23 @@ def receive_message():
                     if len(message['message'].get('text'))>3 and init_message==True:
                         response_sent_text = follow_up()
                         send_message(recipient_id, response_sent_text)
-                        t= Timer(60.0,time_message)
-                        t.start()
+                        t =Timer(30.0,timer)
+
+                        
+@app.route("/", methods=['POST'])
+def timer():
+    output = request.get_json()
+    for event in output['entry']:
+        messaging=event['messaging']
+        for message in messaging:
+            response_sent_text= time_message()
+            send_message(recipient_id, response_sent_text)
+            
+                        
                     
-              
+                       
+                    
+               
     return "Message Processed"
 
 def time_message():
@@ -64,7 +77,7 @@ def follow_up():
 #chooses a random message to send to the user
 def initial_message():
     global init_message
-    sample_responses = "Hello, this is the homework bot 2.0! This is a program that will help remind you to do your homework! We just need some information from you first. You're name is needed, teacher/guardian e-mail, and classes are needed"
+    sample_responses = "Hello, this is the homework bot 2.0! This is a program that will help remind you to do your homework! Please let us know the times of when to remind you(example text: 4:00 PM). Note:This is the time may not be exact to the time of yours due to the server placement(mid west timezone US)"
     # return selected item to the user
     return (sample_responses)
 
