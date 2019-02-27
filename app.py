@@ -32,9 +32,9 @@ def receive_message():
                         response_sent_text = initial_message()
                         send_message(recipient_id, response_sent_text)
                         init_message=True
-                        if message['message'].get('text') and init_message==True:
-                            response_sent_text = follow_up()
-                            send_message(recipient_id, response_sent_text)
+                    if message['message'].get('text') and init_message==True:
+                        response_sent_text = follow_up()
+                        send_message(recipient_id, response_sent_text)
                     
                 #if user sends us a GIF, photo,video, or any other non-text item
                     if message['message'].get('attachments'):
