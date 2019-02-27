@@ -2,7 +2,7 @@
 from flask import Flask, request
 from pymessenger.bot import Bot
 import os 
-import threading
+import thread
 app = Flask(__name__)
 ACCESS_TOKEN = 'EAAFwNZBxNu4kBADCKS6NqESrQ626KIl0gAAmklTqBg9T56cnZBFg8jbKofZAkU7RJs96j5PrX2ZCqAPlZAIZBpCZBjD8Shp3qPzMLrSe1zCqZAjlZCfDlSx6wndHynvvY33CdtDXVPDUtRGqsumjKnOdENsA15VcCAQvlzWetaIYI10AahkhveyPx'   #ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 VERIFY_TOKEN = 'VERIFY_TOKEN'   #VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
