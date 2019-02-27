@@ -39,26 +39,19 @@ def receive_message():
                         send_message(recipient_id, response_sent_text)
                         t= timer(30.0,hour)
                         t.start()
+                    if timerbool=True:
+                        response_sent_text= time_message()
+                        send_message(recipient_id, response_sent_text)
+
+                        
                        
            
     return "Message Processed"
 
-@app.route("/", methods=['POST'])
-def timer():
-    global timerbool
-    output = request.get_json()
-    for event in output['entry']:
-        messaging=event['messaging']
-        for message in messaging:
-            recipient_id=message['sender']['id']
-            if timerbool==True:
-                response_sent_text= time_message()
-                send_message(recipient_id, response_sent_text)
                 
 def hour():
     global timerbool
-    if True:
-        return timerbool=True
+    return timerbool=True
     return("time up")
 
 
