@@ -36,12 +36,10 @@ def receive_message():
                     if len(message['message'].get('text'))>3 and init_message==True:
                         response_sent_text = follow_up()
                         send_message(recipient_id, response_sent_text)
+                        t= Timer(60.0,time_message)
+                        t.start()
                     
-                #if user sends us a GIF, photo,video, or any other non-text item
-                    if message['message'].get('attachments'):
-                        response_sent_nontext = get_message()
-                        send_message(recipient_id, response_sent_nontext)
-            
+              
     return "Message Processed"
 
 def time_message():
