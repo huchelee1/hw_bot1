@@ -39,10 +39,10 @@ def receive_message():
                     if len(message['message'].get('text'))>3 and init_message==True:
                         response_sent_text = follow_up()
                         send_message(recipient_id, response_sent_text)
-                        set_time()
-                    if timerbool==True:
-                        response_sent_text= time_message()
-                        send_message(recipient_id, response_sent_text)
+                        #set_time()
+                    #if timerbool==True:
+                        #response_sent_text= time_message()
+                        #send_message(recipient_id, response_sent_text)
     return "Message Processed"
 
 # this is the timer that will be used to send messages periodcally           
