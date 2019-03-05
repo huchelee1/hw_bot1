@@ -46,15 +46,15 @@ def receive_message():
     return "Message Processed"
 
 # this is the timer that will be used to send messages periodcally           
-def set_time():
-    t= timer(30.0,global_time)
-    t.start()
-    return("time up")
+#def set_time():
+#    t= timer(30.0,global_time)
+   # t.start()
+    #return("time up")
 
 # This function is used for setting timerbool to be true and cause the if statement in recieve_message to send messages periodically
-def global_time():
-    global timerbool
-    return timerbool=True
+#def global_time():
+   #global timerbool
+    #return timerbool=True
 
 # this function is used as the reminders throughout the day. 
 def time_message():
